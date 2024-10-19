@@ -5,6 +5,6 @@ export const asyncHandler = (fn: any) => async (req: NextRequest) => {
         return await fn(req)
     } catch (error) {
         console.log(error)
-        return NextResponse.json({"message": "Server Error", "error": error})
+        return NextResponse.json({"message": "Server Error", "error": error}, { status: 500 })
     }
 }

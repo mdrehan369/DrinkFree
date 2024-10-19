@@ -31,10 +31,10 @@ model Address {
   country     String @default("India")
   landmark    String
   street      String
-  pinCode     Int
+  pinCode     String
   area        String
-  houseNumber Int
-  floor       Int
+  houseNumber String
+  floor       String
   userId      Int    @unique
   user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

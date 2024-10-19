@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `Address` MODIFY `pinCode` VARCHAR(191) NOT NULL,
+    MODIFY `houseNumber` VARCHAR(191) NOT NULL,
+    MODIFY `floor` VARCHAR(191) NOT NULL;

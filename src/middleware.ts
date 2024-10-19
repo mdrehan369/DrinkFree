@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
     try {
 
         // Allowing all data enters
-        if(req.nextUrl.pathname != '/') return NextResponse.next()
+        if(req.nextUrl.pathname != '/' && req.nextUrl.pathname != '/admin' && req.nextUrl.pathname != '/staff') return NextResponse.next()
         const decodedToken = getdecodedToken()
 
         // Redirect to auth page if not signed in
