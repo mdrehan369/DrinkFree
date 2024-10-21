@@ -46,7 +46,7 @@ const SignInForm = () => {
         try {
             const response = await axiosInstance.post('/api/v1/signin', values)
             console.log(response)
-            router.push('/admin')
+            router.push('/')
 			toast({title: "Logged In Successfully", variant: "default", className: "bg-green-500"})
         } catch (error) {
 			if(axios.isAxiosError(error)) {

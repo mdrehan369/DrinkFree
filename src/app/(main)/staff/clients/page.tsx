@@ -59,7 +59,7 @@ export default function Clients() {
                         clients.map((client) => (
                             <div
                                 onClick={() =>
-                                    router.push(`/admin/clients/${client.id}`)
+                                    router.push(`/staff/clients/${client.id}`)
                                 }
                                 key={client.id}
                                 className="flex flex-col items-start justify-between w-[80%] bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors duration-300 px-5 gap-1 rounded-sm p-2 border-[1px] border-gray-500">

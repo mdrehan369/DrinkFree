@@ -1,21 +1,29 @@
+import { getdecodedToken } from '@/utils/jwtUtils'
 import { prismaClient } from '@/utils/prismaClient'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export const GET = async (
     req: NextRequest,
-    { params }: { params: { staffId: string } }
+    { params }: { params: { clientId: string } }
 ) => {
     try {
-        const id = Number(params.staffId)
+        const decodedToken = await getdecodedToken()
+        if (decodedToken?.role == 'CLIENT')
+            return NextResponse.json(
+                { message: 'Not Authorized' },
+                { status: 403 }
+            )
+
+        const id = params.clientId
         if (!id)
             return NextResponse.json(
                 { message: 'No ID given or ID is invalid' },
                 { status: 400 }
             )
 
-        const client = await prismaClient.user.findFirst({
+        let client = await prismaClient.user.findFirst({
             where: {
-                id: id,
+                OR: [{ bussinessName: id }, { id: Number(id) || 0 }],
             },
         })
 
@@ -31,6 +39,9 @@ export const GET = async (
         )
     } catch (error) {
         console.log(error)
-        return NextResponse.json({"message": "Server Error", "error": error}, { status: 500 })
+        return NextResponse.json(
+            { message: 'Server Error', error: error },
+            { status: 500 }
+        )
     }
 }

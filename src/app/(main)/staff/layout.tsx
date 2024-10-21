@@ -2,10 +2,8 @@
 'use client'
 import Link from 'next/link'
 import {
-    UserRoundPlus,
     LayoutDashboard,
     Database,
-    Users,
     Contact,
     LogOutIcon,
 } from 'lucide-react'
@@ -13,7 +11,7 @@ import { logout } from '@/actions/user.action'
 import { useRouter } from 'next/navigation'
 
 const DashboardLayout = ({ children }: any) => {
-    
+
     const router = useRouter()
 
     return (
@@ -26,29 +24,16 @@ const DashboardLayout = ({ children }: any) => {
                     </h2>
                 </div>
                 <ul className="gap-2 flex flex-col items-center justify-start mt-16">
-                    <Link
-                        href="/admin/register"
-                        className="w-[90%] cursor-pointer px-8 rounded-md text-lg font-bold flex items-center justify-start gap-2 p-2 hover:bg-gray-900 transition-colors duration-300">
-                        <UserRoundPlus />
-                        Register
-                    </Link>
 
                     <Link
-                        href="/admin/clients"
+                        href="/staff/clients"
                         className="w-[90%] cursor-pointer px-8 rounded-md text-lg font-bold flex items-center justify-start gap-2 p-2 hover:bg-gray-900 transition-colors duration-300">
                         <Contact />
                         Clients
                     </Link>
-                    
-                    <Link
-                        href="/admin/staffs"
-                        className="w-[90%] cursor-pointer px-8 rounded-md text-lg font-bold flex items-center justify-start gap-2 p-2 hover:bg-gray-900 transition-colors duration-300">
-                        <Users />
-                        Staffs
-                    </Link>
 
                     <Link
-                        href="/admin/data-collected"
+                        href="/staff/data-collected"
                         className="w-[90%] cursor-pointer px-8 rounded-md text-lg font-bold flex items-center justify-start gap-2 p-2 hover:bg-gray-900 transition-colors duration-300">
                         <Database />
                         Data Collected
@@ -60,6 +45,7 @@ const DashboardLayout = ({ children }: any) => {
                         <LogOutIcon />
                         Log Out
                     </li>
+
                 </ul>
             </nav>
             <main className="flex-1 bg-gray-100 h-[100vh] overflow-y-scroll">

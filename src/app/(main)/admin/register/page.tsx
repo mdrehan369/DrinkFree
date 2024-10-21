@@ -29,7 +29,10 @@ export default function Register() {
     const [cpassword, setCpassword] = useState("")
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        mode: "onChange"
+        mode: "onChange",
+        defaultValues: {
+            role: "STAFF"
+        }
     })
     const { toast } = useToast()
     const router = useRouter()

@@ -8,7 +8,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 export const GET = asyncHandler(async (req: NextRequest) => {
     const decodedToken = await getdecodedToken()
-    if (decodedToken?.role != 'ADMIN')
+    if (decodedToken?.role == "CLIENT")
         return NextResponse.json({ message: 'Not Authorized' }, { status: 403 })
 
     const search = req.nextUrl.searchParams.get('search') || ''

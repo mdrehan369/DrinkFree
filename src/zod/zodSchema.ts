@@ -62,9 +62,11 @@ export const UserSchema = z
     })
     .refine(
         (args) => {
-            if (args.role === 'CLIENT')
+            if (args.role == 'CLIENT')
                 return (
+                    args.bussinessName &&
                     args.bussinessName?.length != 0 &&
+                    args.websiteUrl &&
                     args.websiteUrl?.length != 0
                 )
             return true
@@ -75,15 +77,15 @@ export const UserSchema = z
     )
 
 export const DataSchema = z.object({
-    firstName: z.string({ required_error: 'firstName is required' }),
-    lastName: z.string({ required_error: 'lastName is required' }),
+    firstName: z.string({ required_error: 'First Name is required' }),
+    lastName: z.string({ required_error: 'Last Name is required' }),
     phoneNumber: z
-        .string({ required_error: 'phoneNumber is required' })
-        .regex(new RegExp(/^(?:\+91|91)?[645789]\d{9}$/)),
+        .string({ required_error: 'Phone Number is required' })
+        .refine(val => val.match(new RegExp(/^(?:\+91|91)?[645789]\d{9}$/)), { message: "Invalid Phone Number" }),
+        // .regex(new RegExp(/^(?:\+91|91)?[645789]\d{9}$/)),
     email: z
-        .string({ required_error: 'email is required' })
-        .email()
-        .regex(new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)),
+        .string({ required_error: 'Email is required' })
+        .email().refine(val => val.match(new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)), { message: "Invalid Email Address" }),
     gender: Gender,
     clientId: z.number({ required_error: 'clientId is required' }),
 })
