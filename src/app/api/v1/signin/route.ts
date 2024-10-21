@@ -2,6 +2,7 @@ import { asyncHandler } from '@/utils/asyncHandler'
 import { generateAccessToken } from '@/utils/jwtUtils'
 import { prismaClient } from '@/utils/prismaClient'
 import { UserSigninSchema } from '@/zod/zodSchema'
+import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const POST = asyncHandler(async (req: NextRequest) => {
@@ -36,7 +37,7 @@ export const POST = asyncHandler(async (req: NextRequest) => {
     if (!user) return NextResponse.json({ message: 'User does not exists' }, { status: 404 })
 
     if (prismaClient.user.checkPassword(user.password, parsedData.password)) {
-        generateAccessToken({ role: user.role, id: user.id })
+        await generateAccessToken({ role: user.role, id: user.id })
         user.password = ''
         return NextResponse.json({
             message: 'User loggedin successfully',

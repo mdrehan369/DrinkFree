@@ -15,10 +15,10 @@ export const GET = asyncHandler(async (req: NextRequest) => {
     const limit = Number(req.nextUrl.searchParams.get('limit')) || 10
     const page = Number(req.nextUrl.searchParams.get('page')) || 0
 
-    const clients = await prismaClient.user.findMany({
+    const staffs = await prismaClient.user.findMany({
         where: {
             AND: [
-                { role: 'CLIENT' },
+                { role: 'STAFF' },
                 {
                     OR: [
                         {
@@ -31,11 +31,6 @@ export const GET = asyncHandler(async (req: NextRequest) => {
                                 contains: search,
                             },
                         },
-                        {
-                            bussinessName: {
-                                contains: search
-                            }
-                        }
                     ],
                 },
             ]
@@ -44,5 +39,5 @@ export const GET = asyncHandler(async (req: NextRequest) => {
         skip: limit * page
     })
 
-    return NextResponse.json({ message: 'Fetched', clients }, { status: 200 })
+    return NextResponse.json({ message: 'Fetched', staffs }, { status: 200 })
 })

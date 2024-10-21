@@ -31,6 +31,7 @@ export default function DataFillForm({
 
     return (
         <div>
+            {params.clientId}
             <form
                 onSubmit={handleSubmit}
                 className="space-y-4">

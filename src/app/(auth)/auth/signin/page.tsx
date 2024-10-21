@@ -46,8 +46,8 @@ const SignInForm = () => {
         try {
             const response = await axiosInstance.post('/api/v1/signin', values)
             console.log(response)
-            router.push('/')
-			toast({title: "Logged In Successfully", variant: "default"})
+            router.push('/admin')
+			toast({title: "Logged In Successfully", variant: "default", className: "bg-green-500"})
         } catch (error) {
 			if(axios.isAxiosError(error)) {
 				toast({title: error.response?.data.message || "Something went wrong", variant: "destructive"})
@@ -63,7 +63,7 @@ const SignInForm = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8 border-2 w-[30%] px-10 py-14 rounded-lg">
+                    className="space-y-8 border-2 border-gray-200 w-[30%] px-10 py-14 rounded-lg">
                     <FormField
                         control={form.control}
                         name="emailOrPhoneNumber"

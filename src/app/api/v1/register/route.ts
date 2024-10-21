@@ -3,10 +3,11 @@ import { asyncHandler } from "@/utils/asyncHandler";
 import { UserSchema } from "@/zod/zodSchema";
 import { prismaClient } from "@/utils/prismaClient";
 import { getdecodedToken } from "@/utils/jwtUtils";
+import { cookies } from "next/headers";
 
 export const POST = asyncHandler(async (req: NextRequest) => {
 
-    const decodedToken = getdecodedToken()
+    const decodedToken = await getdecodedToken()
     if(!decodedToken || decodedToken.role === "STAFF" || decodedToken.role === "CLIENT")
         return NextResponse.json({ "message": "Not authorized!" }, { status: 403 })
 
