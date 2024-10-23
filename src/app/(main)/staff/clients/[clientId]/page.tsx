@@ -20,10 +20,11 @@ export default function Client({ params }: { params: { clientId: string } }) {
                     `/api/v1/client/${params.clientId}`
                 )
                 setClient(response.data.client)
-                if(process.env.NODE_ENV === "production")
-                    url.current = `${process.env.SERVER}/${response.data.client.bussinessName}`
-                else
-                    url.current = `http://localhost:3000/${response.data.client.bussinessName}`
+                // if(process.env.NODE_ENV === "production")
+                //     url.current = `${process.env.SERVER}/${response.data.client.bussinessName}`
+                // else
+                //     url.current = `http://localhost:3000/${response.data.client.bussinessName}`
+                url.current = `${window.location.origin}/${response.data.client.bussinessName}`
             } catch (error) {
                 console.log(error)
             } finally {

@@ -20,7 +20,7 @@ export default function Client({ params }: { params: { clientId: string } }) {
                     `/api/v1/client/${params.clientId}`
                 )
                 setClient(response.data.client)
-                url.current = `http://${process.env.SERVER || "localhost:3000"}/${response.data.client.bussinessName}`
+                url.current = `${window.location.origin}/${response.data.client.bussinessName}`
             } catch (error) {
                 console.log(error)
             } finally {
