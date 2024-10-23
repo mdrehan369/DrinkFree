@@ -4,7 +4,7 @@ import { Container } from '@/components/customComponents/Container'
 import { Loader } from '@/components/customComponents/Loader'
 import { SearchBar } from '@/components/customComponents/SearchBar'
 import { axiosInstance } from '@/utils/axiosInstance'
-import { User } from '@prisma/client'
+import { Data, Prisma } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -14,8 +14,8 @@ type Query = {
     page: Number
 }
 
-export default function Clients() {
-    const [clients, setClients] = useState<Array<User>>([])
+export default function DataCollected() {
+    const [datas, setDatas] = useState<Array<Prisma.DataGetPayload<{include: {client: true}}>>>([])
     const [loading, setLoading] = useState(false)
     const [queries, setQueries] = useState<Query>({
         search: '',
@@ -29,9 +29,9 @@ export default function Clients() {
             try {
                 setLoading(true)
                 const response = await axiosInstance.get(
-                    `/api/v1/client?search=${queries.search}&limit=${queries.limit}&page=${queries.page}`
+                    `/api/v1/data?search=${queries.search}&limit=${queries.limit}&page=${queries.page}`
                 )
-                setClients(response.data.clients)
+                setDatas(response.data.datas)
                 console.log(response)
             } catch (error) {
                 console.log(error)
@@ -51,30 +51,30 @@ export default function Clients() {
             />
             <div className="w-[100%] h-[90%] overflow-y-scroll flex flex-col items-center justify-start gap-2 mt-10 px-2">
                 {!loading ? (
-                    clients.length === 0 ? (
+                    datas.length === 0 ? (
                         <div className="w-full h-[100%] flex items-center justify-center">
-                            No Client Found!
+                            No Data Found!
                         </div>
                     ) : (
-                        clients.map((client) => (
+                        datas.map((data) => (
                             <div
                                 onClick={() =>
-                                    router.push(`/admin/clients/${client.id}`)
+                                    router.push(`/admin/data-collected/${data.id}`)
                                 }
-                                key={client.id}
+                                key={data.id}
                                 className="flex flex-col items-start justify-between w-[80%] bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors duration-300 px-5 gap-1 rounded-sm p-2 border-[1px] border-gray-500">
                                 <div className="w-full flex items-center justify-between font-bold text-lg space-x-2">
                                     <div className='space-x-2'>
-                                        <span>{client.firstName}</span>
-                                        <span>{client.lastName}</span>
+                                        <span>{data.firstName}</span>
+                                        <span>{data.lastName}</span>
                                     </div>
-                                    <span>{client.bussinessName}</span>
+                                    <span>{data.client.bussinessName}</span>
                                 </div>
                                 <div className='w-full flex items-center justify-between'>
                                     <span className="text-xs text-gray-600">
-                                        @{client.email}
+                                        @{data.email}
                                     </span>
-                                    <span className='text-xs text-gray-600'>{client.websiteUrl}</span>
+                                    <span className='text-xs text-gray-600'>{data.client.websiteUrl}</span>
                                 </div>
                             </div>
                         ))

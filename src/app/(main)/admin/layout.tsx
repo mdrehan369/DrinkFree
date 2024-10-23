@@ -22,7 +22,7 @@ const DashboardLayout = ({ children }: any) => {
                 <div className=" w-full mt-10 flex items-center justify-center gap-2">
                     <LayoutDashboard />
                     <h2 className="text-xl text-center font-bold h-full">
-                        Staff Dashboard
+                        Admin Dashboard
                     </h2>
                 </div>
                 <ul className="gap-2 flex flex-col items-center justify-start mt-16">

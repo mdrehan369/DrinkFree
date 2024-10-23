@@ -65,7 +65,7 @@ export default function Register() {
     }
 
     return (
-        <Container className="w-[75vw] h-auto flex flex-col items-center justify-start pt-20 pb-10 pr-0">
+        <Container className="w-[80vw] h-auto flex flex-col items-center justify-start pt-20 pb-10 pr-0">
             <Form {...form}>
                 <h1 className="text-xl font-bold w-[80%] py-4 underline">
                     Personal Details

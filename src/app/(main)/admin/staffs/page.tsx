@@ -42,7 +42,7 @@ export default function Clients() {
     }, [queries])
 
     return (
-        <Container className="w-[75vw] h-[100vh] flex flex-col items-center justify-start py-10">
+        <Container className="w-[80vw] h-[100vh] flex flex-col items-center justify-start py-10">
             <SearchBar
                 value={queries.search}
                 setValue={(val: string) =>
