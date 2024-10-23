@@ -86,13 +86,13 @@ export default function DataFillForm({
         </div>
         : !loading ?
         <Container className="flex flex-col items-center justify-center">
-            <h1 className="w-[30%] text-center font-bold text-xl">
+            <h1 className="md:w-[30%] w-[80%] text-center font-bold text-xl">
                 Drink Free
             </h1>
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-6 w-[30%]">
+                    className="space-y-6 md:w-[30%] w-[80%]">
                     <FormField
                         control={form.control}
                         name="firstName"
