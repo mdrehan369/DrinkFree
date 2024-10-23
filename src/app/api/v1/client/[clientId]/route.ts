@@ -7,12 +7,12 @@ export const GET = async (
     { params }: { params: { clientId: string } }
 ) => {
     try {
-        const decodedToken = await getdecodedToken()
-        if (decodedToken?.role == 'CLIENT')
-            return NextResponse.json(
-                { message: 'Not Authorized' },
-                { status: 403 }
-            )
+        // const decodedToken = await getdecodedToken()
+        // if (decodedToken?.role == 'CLIENT')
+        //     return NextResponse.json(
+        //         { message: 'Not Authorized' },
+        //         { status: 403 }
+        //     )
 
         const id = params.clientId
         if (!id)
